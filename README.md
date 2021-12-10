@@ -1,4 +1,4 @@
-<img src="https://www.kindpng.com/picc/m/176-1766554_dart-programming-language-logo-hd-png-download.png" width="90" align="right">
+<img src="https://www.kindpng.com/picc/m/176-1766554_dart-programming-language-logo-hd-png-download.png" width="160" align="right">
 
 # AdventOfCode-Starter-Darts
 
