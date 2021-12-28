@@ -27,8 +27,16 @@ Automatically reads the input files and provides different methods to parse it.
 ### Parse Util
 A place to store useful parsing operations, like creating a `List<int>` from a `List<String>`. There will be a lot of opportunities during AoC for you to extend this.
 
+### Field Class
+A helper class for 2D data, as often present in AoC. Any data can be respresented. For Integers specifically, there are convenience methods in `IntegerField`. For all available methods, have a look at the abundantly-documented code.
+
 ### Naming conventions
 When using the Boilerplate generator, everything is done for you automatically. However, if you create a solution or input file by yourself: make sure it has a 2-digit number. Concretely, pad days 1-9 as `Day01.dart` for solutions and `aoc01.txt` for input.
+
+### Helper Packages
+**Tuple** enables operations on pairs/triplets etc of any type. Absolutely needed for most of the puzzles.
+**Collection** provides many methods for ...collections... Most importantly, a `groupBy` and a collection equality interface.
+**Quiver** is an awesome toolbox of helper methods for Dart. We mostly use `/iterables` (similar to Pythonds `itertools`). 
 
 ## Contributing
 Contributing is greatly appreciated, just fork this project and create a Pull Request, or open an Issue!
