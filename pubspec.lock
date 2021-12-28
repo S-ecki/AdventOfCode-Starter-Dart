@@ -23,7 +23,7 @@ packages:
     source: hosted
     version: "1.8.0"
   quiver:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: quiver
       url: "https://pub.dartlang.org"
