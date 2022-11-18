@@ -2,14 +2,15 @@
 
 # AdventOfCode-Starter-Darts
 
-This is a Starter project for [AdventOfCode](https://adventofcode.com/2021), written in `Dart`. Feel free to use it for your own adventures with the christmas-themed puzzles!
+This is a Starter project for [AdventOfCode](https://adventofcode.com/2022), written in `Dart`. Feel free to use it for your own adventures with the christmas-themed puzzles!
 
 ## How to use
 The code is commented abundantly, but you can find an overview about the features here as well.
 
 ### Boilterplate Generation
 In the root of your directory, run `dart run day_generator.dart <day>` <br>
-This will create an empty input file and a solution file with all the needed boilerplate to have a quick start. It also adds the solution to the corresponding index file, so the solution get imported into `main` automatically.
+In order for this to work, you should first go to [AdventOfCode](https://adventofcode.com/2022) and log in. After you log in, you can get your cookie from the browser, and add it to the day_generator.dart file.  This will allow the script to populate your input file.
+This will create an input file and a solution file with all the needed boilerplate to have a quick start. It also adds the solution to the corresponding index file, so the solution get imported into `main` automatically. 
 
 ### Main
 To add a new solution, all you have to do is add `DayXX()` to the `day` List. Running main automatically prints either all your solutions, or just the last one, depending on your settings.
