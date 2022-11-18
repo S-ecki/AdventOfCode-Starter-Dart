@@ -7,9 +7,11 @@ This is a Starter project for [AdventOfCode](https://adventofcode.com/2022), wri
 ## How to use
 The code is commented abundantly, but you can find an overview about the features here as well.
 
+### Setup
+Please visit the [AdventOfCode](https://adventofcode.com/2022) site and log in. After that, get your cookie from the browser, and add it to the day_generator.dart file´s `session` variable. This will allow the script to populate your input file.
+
 ### Boilterplate Generation
 In the root of your directory, run `dart run day_generator.dart <day>` <br>
-In order for this to work, you should first go to [AdventOfCode](https://adventofcode.com/2022) and log in. After you log in, you can get your cookie from the browser, and add it to the day_generator.dart file.  This will allow the script to populate your input file.
 This will create an input file and a solution file with all the needed boilerplate to have a quick start. It also adds the solution to the corresponding index file, so the solution get imported into `main` automatically. 
 
 ### Main
