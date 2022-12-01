@@ -17,6 +17,10 @@ This will create an input file and a solution file with all the needed boilerpla
 ### Main
 To add a new solution, all you have to do is add `DayXX()` to the `day` List. Running main automatically prints either all your solutions, or just the last one, depending on your settings.
 
+You can run the main file by running `dart run main.dart` or `dart main.dart` in the root of your directory.
+By default the main file will only show the last solution. If you want to see all of them, you can use the `-a` or `--all` flag.
+You can list all the command line arguments by using the `-h` or `--help` flag.
+
 ### Generic Day
 The abstract class all individual days subclass from. When constructed with the correct `day`, it automatically ready the corresponding input file and provides it with the `InputUtil`. To access it, just call `input` inside your class.
 
