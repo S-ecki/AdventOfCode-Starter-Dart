@@ -43,7 +43,7 @@ When using the Boilerplate generator, everything is done for you automatically. 
 ### Helper Packages
 **Tuple** enables operations on pairs/triplets etc of any type. Absolutely needed for most of the puzzles.
 **Collection** provides many methods for ...collections... Most importantly, a `groupBy` and a collection equality interface.
-**Quiver** is an awesome toolbox of helper methods for Dart. We mostly use `/iterables` (similar to Pythonds `itertools`). 
+**Quiver** is an awesome toolbox of helper methods for Dart. We mostly use `/iterables` (similar to Pythons `itertools`). 
 
 ## Contributing
 Contributing is greatly appreciated, just fork this project and create a Pull Request, or open an Issue!
