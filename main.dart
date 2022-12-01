@@ -7,15 +7,15 @@ final days = <GenericDay>[
 ];
 
 void main(List<String?> args) {
-  bool onlyShowLast = false;
+  bool onlyShowLast = true;
 
   if (args.length == 1 && args[0].isHelperArgument()) {
     printHelper();
     return;
   }
 
-  if (args.length == 1 && args[0].isLastArgument()) {
-    onlyShowLast = true;
+  if (args.length == 1 && args[0].isAllArgument()) {
+    onlyShowLast = false;
   }
 
   onlyShowLast
@@ -30,7 +30,7 @@ Usage: dart main.dart <command>
 
 Global Options:
   -h, --help    Show this help message
-  -l, --last    Only show last day
+  -a, --all     Show all solutions
 ''',
   );
 }
@@ -40,7 +40,7 @@ extension ArgsMatcher on String? {
     return this == '-h' || this == '--help';
   }
 
-  bool isLastArgument() {
-    return this == '-l' || this == '--last';
+  bool isAllArgument() {
+    return this == '-a' || this == '--all';
   }
 }
