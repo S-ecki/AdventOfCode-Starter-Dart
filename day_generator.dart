@@ -35,40 +35,28 @@ void main(List<String?> args) async {
   // Create lib file
   final dayFileName = 'day$dayNumber.dart';
   unawaited(
-    File('solutions/$dayFileName').writeAsString(
-      '''
-import '../utils/index.dart';
-
-class Day$dayNumber extends GenericDay {
-  Day$dayNumber() : super(${int.parse(dayNumber)});
-
-  @override
-  parseInput() {
-    
-  }
-
-  @override
-  int solvePart1() {
-    
-    return 0;
-  }
-
-  @override
-  int solvePart2() {
-
-    return 0;
-  }
-}
-
-''',
-    ),
+    File('solutions/$dayFileName').writeAsString(dayTemplate(dayNumber)),
   );
 
-  // export new day in index file
-  File('solutions/index.dart').writeAsString(
-    'export \'day$dayNumber.dart\';\n',
-    mode: FileMode.append,
-  );
+  final exportFile = File('solutions/index.dart');
+  final exports = exportFile.readAsLinesSync();
+  String content = "export \'day$dayNumber.dart\';\n";
+  bool found = false;
+  // check if line already exists
+  for (final line in exports) {
+    if (line.contains('day$dayNumber.dart')) {
+      found = true;
+      break;
+    }
+  }
+
+  // export new day in index file if not present
+  if (!found) {
+    exportFile.writeAsString(
+      content,
+      mode: FileMode.append,
+    );
+  }
 
   // Create input file
   print('Loading input from adventofcode.com...');
@@ -85,4 +73,32 @@ class Day$dayNumber extends GenericDay {
   }
 
   print('All set, Good luck!');
+}
+
+String dayTemplate(String dayNumber) {
+  return '''
+import '../utils/index.dart';
+
+class Day$dayNumber extends GenericDay {
+  Day$dayNumber() : super(${int.parse(dayNumber)});
+
+  @override
+  parseInput() {
+
+  }
+
+  @override
+  int solvePart1() {
+
+    return 0;
+  }
+
+  @override
+  int solvePart2() {
+
+    return 0;
+  }
+}
+
+''';
 }
