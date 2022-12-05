@@ -35,33 +35,7 @@ void main(List<String?> args) async {
   // Create lib file
   final dayFileName = 'day$dayNumber.dart';
   unawaited(
-    File('solutions/$dayFileName').writeAsString(
-      '''
-import '../utils/index.dart';
-
-class Day$dayNumber extends GenericDay {
-  Day$dayNumber() : super(${int.parse(dayNumber)});
-
-  @override
-  parseInput() {
-    
-  }
-
-  @override
-  int solvePart1() {
-    
-    return 0;
-  }
-
-  @override
-  int solvePart2() {
-
-    return 0;
-  }
-}
-
-''',
-    ),
+    File('solutions/$dayFileName').writeAsString(dayTemplate(dayNumber)),
   );
 
   final exportFile = File('solutions/index.dart');
@@ -99,4 +73,32 @@ class Day$dayNumber extends GenericDay {
   }
 
   print('All set, Good luck!');
+}
+
+String dayTemplate(String dayNumber) {
+  return '''
+import '../utils/index.dart';
+
+class Day$dayNumber extends GenericDay {
+  Day$dayNumber() : super(${int.parse(dayNumber)});
+
+  @override
+  parseInput() {
+
+  }
+
+  @override
+  int solvePart1() {
+
+    return 0;
+  }
+
+  @override
+  int solvePart2() {
+
+    return 0;
+  }
+}
+
+''';
 }
