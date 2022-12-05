@@ -64,11 +64,25 @@ class Day$dayNumber extends GenericDay {
     ),
   );
 
-  // export new day in index file
-  File('solutions/index.dart').writeAsString(
-    'export \'day$dayNumber.dart\';\n',
-    mode: FileMode.append,
-  );
+  final exportFile = File('solutions/index.dart');
+  final exports = exportFile.readAsLinesSync();
+  String content = "export \'day$dayNumber.dart\';\n";
+  bool found = false;
+  // check if line already exists
+  for (final line in exports) {
+    if (line.contains('day$dayNumber.dart')) {
+      found = true;
+      break;
+    }
+  }
+
+  // export new day in index file if not present
+  if (!found) {
+    exportFile.writeAsString(
+      content,
+      mode: FileMode.append,
+    );
+  }
 
   // Create input file
   print('Loading input from adventofcode.com...');
