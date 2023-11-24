@@ -7,9 +7,10 @@ typedef VoidFieldCallback = void Function(int, int);
 /// A helper class for easier work with 2D data.
 class Field<T> {
   Field(List<List<T>> field)
-      : assert(field.length > 0),
-        assert(field[0].length > 0),
-        // creates a deep copy by value from given field to prevent unwarranted overrides
+      : assert(field.isNotEmpty, 'Field must not be empty'),
+        assert(field[0].isNotEmpty, 'First position must not be empty'),
+        // creates a deep copy by value from given field to prevent unwarranted
+        // overrides
         field = List<List<T>>.generate(
           field.length,
           (y) => List<T>.generate(field[0].length, (x) => field[y][x]),
@@ -28,11 +29,11 @@ class Field<T> {
   T getValueAt(int x, int y) => getValueAtPosition(Position(x, y));
 
   /// Sets the value at the given Position.
-  setValueAtPosition(Position position, T value) =>
+  void setValueAtPosition(Position position, T value) =>
       field[position.y][position.x] = value;
 
   /// Sets the value at the given coordinates.
-  setValueAt(int x, int y, T value) =>
+  void setValueAt(int x, int y, T value) =>
       setValueAtPosition(Position(x, y), value);
 
   /// Returns whether the given position is inside of this field.
@@ -55,9 +56,9 @@ class Field<T> {
   T get maxValue => max<T>(field.expand((element) => element))!;
 
   /// Executes the given callback for every position on this field.
-  forEach(VoidFieldCallback callback) {
-    for (int y = 0; y < height; y++) {
-      for (int x = 0; x < width; x++) {
+  void forEach(VoidFieldCallback callback) {
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
         callback(x, y);
       }
     }
@@ -69,11 +70,13 @@ class Field<T> {
       .fold<int>(0, (acc, elem) => elem == searched ? acc + 1 : acc);
 
   /// Executes the given callback for all given positions.
-  forPositions(
+  void forPositions(
     Iterable<Position> positions,
     VoidFieldCallback callback,
   ) {
-    positions.forEach((position) => callback(position.x, position.y));
+    for (final position in positions) {
+      callback(position.x, position.y);
+    }
   }
 
   /// Returns all adjacent cells to the given position. This does `NOT` include
@@ -85,7 +88,8 @@ class Field<T> {
       Position(x - 1, y),
       Position(x + 1, y),
     }..removeWhere(
-        (pos) => pos.x < 0 || pos.y < 0 || pos.x >= width || pos.y >= height);
+        (pos) => pos.x < 0 || pos.y < 0 || pos.x >= width || pos.y >= height,
+      );
   }
 
   /// Returns all positional neighbours of a point. This includes the adjacent
@@ -102,7 +106,8 @@ class Field<T> {
       Position(x - 1, y),
       Position(x - 1, y - 1),
     }..removeWhere(
-        (pos) => pos.x < 0 || pos.y < 0 || pos.x >= width || pos.y >= height);
+        (pos) => pos.x < 0 || pos.y < 0 || pos.x >= width || pos.y >= height,
+      );
   }
 
   /// Returns a deep copy by value of this [Field].
@@ -116,21 +121,21 @@ class Field<T> {
 
   @override
   String toString() {
-    String result = '';
+    final result = StringBuffer();
     for (final row in field) {
       for (final elem in row) {
-        result += elem.toString();
+        result.write(elem.toString());
       }
-      result += '\n';
+      result.write('\n');
     }
-    return result;
+    return result.toString();
   }
 }
 
-/// Extension for [Field]s where [T] is of type [int].
+/// Extension for [Field]s where `T` is of type [int].
 extension IntegerField on Field<int> {
   /// Increments the values of Position `x` `y`.
-  increment(int x, int y) => this.setValueAt(x, y, this.getValueAt(x, y) + 1);
+  dynamic increment(int x, int y) => setValueAt(x, y, getValueAt(x, y) + 1);
 
   /// Convenience method to create a Field from a single String, where the
   /// String is a "block" of integers.

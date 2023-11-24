@@ -4,7 +4,8 @@ import '../utils/index.dart';
 /// input and a common interface.
 ///
 /// Naming convention is set to pad any single-digit day with `0` to have proper
-/// ordering of files and correct mapping between input for days and the day files.
+/// ordering of files and correct mapping between input for days and the day
+/// files.
 class Day01 extends GenericDay {
   // call the superclass with an integer == today´s day
   Day01() : super(1);

@@ -3,15 +3,14 @@ import 'dart:io';
 /// Automatically reads reads the contents of the input file for given [day]. \
 /// Note that file name and location must align.
 class InputUtil {
-  final String _inputAsString;
-  final List<String> _inputAsList;
-
   InputUtil(int day)
       : _inputAsString = _readInputDay(day),
         _inputAsList = _readInputDayAsList(day);
+  final String _inputAsString;
+  final List<String> _inputAsList;
 
   static String _createInputPath(int day) {
-    String dayString = day.toString().padLeft(2, '0');
+    final dayString = day.toString().padLeft(2, '0');
     return './input/aoc$dayString.txt';
   }
 

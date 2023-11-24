@@ -5,8 +5,5 @@ analyzer:
 
 linter:
   rules:
-    public_member_api_docs: false
-    library_private_types_in_public_api: false
-    implementation_imports: false
     flutter_style_todos: false
-    avoid_positional_boolean_parameters: false
+    avoid_print: false

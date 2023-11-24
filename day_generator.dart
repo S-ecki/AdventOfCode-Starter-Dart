@@ -4,8 +4,8 @@ import 'dart:io';
 /// Small Program to be used to generate files and boilerplate for a given day.\
 /// Call with `dart run day_generator.dart <day>`
 void main(List<String?> args) async {
-  String year = '2022';
-  String session = '<your session cookie here>';
+  const year = '2022';
+  const session = '<your session cookie here>';
 
   if (args.length > 1) {
     print('Please call with: <dayNumber>');
@@ -15,7 +15,7 @@ void main(List<String?> args) async {
   String? dayNumber;
 
   // input through terminal
-  if (args.length == 0) {
+  if (args.isEmpty) {
     print('Please enter a day for which to generate files');
     final input = stdin.readLineSync();
     if (input == null) {
@@ -40,8 +40,8 @@ void main(List<String?> args) async {
 
   final exportFile = File('solutions/index.dart');
   final exports = exportFile.readAsLinesSync();
-  String content = "export \'day$dayNumber.dart\';\n";
-  bool found = false;
+  final content = "export 'day$dayNumber.dart';\n";
+  var found = false;
   // check if line already exists
   for (final line in exports) {
     if (line.contains('day$dayNumber.dart')) {
@@ -52,7 +52,7 @@ void main(List<String?> args) async {
 
   // export new day in index file if not present
   if (!found) {
-    exportFile.writeAsString(
+    await exportFile.writeAsString(
       content,
       mode: FileMode.append,
     );
@@ -61,14 +61,17 @@ void main(List<String?> args) async {
   // Create input file
   print('Loading input from adventofcode.com...');
   try {
-    final request = await HttpClient().getUrl(Uri.parse(
-        'https://adventofcode.com/$year/day/${int.parse(dayNumber)}/input'));
-    request.cookies.add(Cookie("session", session));
+    final request = await HttpClient().getUrl(
+      Uri.parse(
+        'https://adventofcode.com/$year/day/${int.parse(dayNumber)}/input',
+      ),
+    );
+    request.cookies.add(Cookie('session', session));
     final response = await request.close();
     final dataPath = 'input/aoc$dayNumber.txt';
     // unawaited(File(dataPath).create());
-    response.pipe(File(dataPath).openWrite());
-  } on Error catch (e) {
+    await response.pipe(File(dataPath).openWrite());
+  } catch (e) {
     print('Error loading file: $e');
   }
 
