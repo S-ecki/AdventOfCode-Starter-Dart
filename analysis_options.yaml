@@ -1,0 +1,12 @@
+include: package:very_good_analysis/analysis_options.5.1.0.yaml
+
+analyzer:
+  exclude:
+
+linter:
+  rules:
+    public_member_api_docs: false
+    library_private_types_in_public_api: false
+    implementation_imports: false
+    flutter_style_todos: false
+    avoid_positional_boolean_parameters: false
