@@ -2,7 +2,8 @@ name: aoc
 version: 1.0.0
 
 environment:
-  sdk: '>=2.14.0 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
+
 dependencies:
   collection: ^1.15.0
   quiver: ^3.0.1+1

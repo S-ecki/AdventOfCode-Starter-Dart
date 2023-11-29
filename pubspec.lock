@@ -5,43 +5,49 @@ packages:
     dependency: "direct main"
     description:
       name: collection
-      url: "https://pub.dartlang.org"
+      sha256: "6d4193120997ecfd09acf0e313f13dc122b119e5eca87ef57a7d065ec9183762"
+      url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
   matcher:
     dependency: transitive
     description:
       name: matcher
-      url: "https://pub.dartlang.org"
+      sha256: "2e2c34e631f93410daa3ee3410250eadc77ac6befc02a040eda8a123f34e6f5a"
+      url: "https://pub.dev"
     source: hosted
     version: "0.12.11"
   path:
     dependency: transitive
     description:
       name: path
-      url: "https://pub.dartlang.org"
+      sha256: "2ad4cddff7f5cc0e2d13069f2a3f7a73ca18f66abd6f5ecf215219cdb3638edb"
+      url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
   quiver:
     dependency: "direct main"
     description:
       name: quiver
-      url: "https://pub.dartlang.org"
+      sha256: "616b691d1c8f5c53b7b39ce3542f6a25308d7900bf689d0210e72a644a10387e"
+      url: "https://pub.dev"
     source: hosted
     version: "3.0.1+1"
   stack_trace:
     dependency: transitive
     description:
       name: stack_trace
-      url: "https://pub.dartlang.org"
+      sha256: f8d9f247e2f9f90e32d1495ff32dac7e4ae34ffa7194c5ff8fcc0fd0e52df774
+      url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
   tuple:
     dependency: "direct main"
     description:
       name: tuple
-      url: "https://pub.dartlang.org"
+      sha256: fe3ae4f0dca3f9aac0888e2e0d117b642ce283a82d7017b54136290c0a3b0dd3
+      url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
 sdks:
-  dart: ">=2.14.0 <3.0.0"
+  dart: ">=3.0.0 <4.0.0"
