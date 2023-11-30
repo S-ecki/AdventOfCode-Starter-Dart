@@ -7,5 +7,4 @@ dependencies:
   collection: ^1.15.0
   quiver: ^3.0.1+1
   timing: ^1.0.1
-  tuple: ^2.0.0
   very_good_analysis: ^5.1.0
