@@ -1,7 +1,6 @@
 import 'package:quiver/iterables.dart';
-import 'package:tuple/tuple.dart';
 
-typedef Position = Tuple2<int, int>;
+typedef Position = (int x, int y);
 typedef VoidFieldCallback = void Function(int, int);
 
 /// A helper class for easier work with 2D data.
@@ -23,25 +22,28 @@ class Field<T> {
   int width;
 
   /// Returns the value at the given position.
-  T getValueAtPosition(Position position) => field[position.y][position.x];
+  T getValueAtPosition(Position position) {
+    final (x, y) = position;
+    return field[y][x];
+  }
 
   /// Returns the value at the given coordinates.
-  T getValueAt(int x, int y) => getValueAtPosition(Position(x, y));
+  T getValueAt(int x, int y) => getValueAtPosition((x, y));
 
   /// Sets the value at the given Position.
-  void setValueAtPosition(Position position, T value) =>
-      field[position.y][position.x] = value;
+  void setValueAtPosition(Position position, T value) {
+    final (x, y) = position;
+    field[y][x] = value;
+  }
 
   /// Sets the value at the given coordinates.
-  void setValueAt(int x, int y, T value) =>
-      setValueAtPosition(Position(x, y), value);
+  void setValueAt(int x, int y, T value) => setValueAtPosition((x, y), value);
 
   /// Returns whether the given position is inside of this field.
-  bool isOnField(Position position) =>
-      position.x >= 0 &&
-      position.y >= 0 &&
-      position.x < width &&
-      position.y < height;
+  bool isOnField(Position position) {
+    final (x, y) = position;
+    return x >= 0 && y >= 0 && x < width && y < height;
+  }
 
   /// Returns the whole row with given row index.
   Iterable<T> getRow(int row) => field[row];
@@ -74,8 +76,8 @@ class Field<T> {
     Iterable<Position> positions,
     VoidFieldCallback callback,
   ) {
-    for (final position in positions) {
-      callback(position.x, position.y);
+    for (final (x, y) in positions) {
+      callback(x, y);
     }
   }
 
@@ -83,12 +85,15 @@ class Field<T> {
   /// diagonal neighbours.
   Iterable<Position> adjacent(int x, int y) {
     return <Position>{
-      Position(x, y - 1),
-      Position(x, y + 1),
-      Position(x - 1, y),
-      Position(x + 1, y),
+      (x, y - 1),
+      (x, y + 1),
+      (x - 1, y),
+      (x + 1, y),
     }..removeWhere(
-        (pos) => pos.x < 0 || pos.y < 0 || pos.x >= width || pos.y >= height,
+        (pos) {
+          final (x, y) = pos;
+          return x < 0 || y < 0 || x >= width || y >= height;
+        },
       );
   }
 
@@ -97,16 +102,19 @@ class Field<T> {
   Iterable<Position> neighbours(int x, int y) {
     return <Position>{
       // positions are added in a circle, starting at the top middle
-      Position(x, y - 1),
-      Position(x + 1, y - 1),
-      Position(x + 1, y),
-      Position(x + 1, y + 1),
-      Position(x, y + 1),
-      Position(x - 1, y + 1),
-      Position(x - 1, y),
-      Position(x - 1, y - 1),
+      (x, y - 1),
+      (x + 1, y - 1),
+      (x + 1, y),
+      (x + 1, y + 1),
+      (x, y + 1),
+      (x - 1, y + 1),
+      (x - 1, y),
+      (x - 1, y - 1),
     }..removeWhere(
-        (pos) => pos.x < 0 || pos.y < 0 || pos.x >= width || pos.y >= height,
+        (pos) {
+          final (x, y) = pos;
+          return x < 0 || y < 0 || x >= width || y >= height;
+        },
       );
   }
 
@@ -148,7 +156,7 @@ extension IntegerField on Field<int> {
   }
 }
 
-extension CoordinateLocator on Position {
-  int get x => item1;
-  int get y => item2;
-}
+// extension CoordinateLocator on Position {
+//   int get x => item1;
+//   int get y => item2;
+// }
