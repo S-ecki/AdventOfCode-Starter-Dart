@@ -2,17 +2,17 @@
 
 # AdventOfCode-Starter-Darts
 
-This is a Starter project for [AdventOfCode](https://adventofcode.com/2022), written in `Dart`. Feel free to use it for your own adventures with the christmas-themed puzzles!
+This is a Starter project for [AdventOfCode](https://adventofcode.com/2023), written in `Dart`. Feel free to use it for your own adventures with the christmas-themed puzzles!
 
 ## How to use
 The code is commented abundantly, but you can find an overview about the features here as well.
 
 ### Setup
-Please visit the [AdventOfCode](https://adventofcode.com/2022) site and log in. After that, get your cookie from the browser, and add it to the day_generator.dart file´s `session` variable. This will allow the script to populate your input file.
+Please visit the [AdventOfCode](https://adventofcode.com/2023) site and log in. After that, get your cookie from the browser, and add it to the day_generator.dart file´s `session` variable. This will allow the script to populate your input file.
 
 ### Boilterplate Generation
 In the root of your directory, run `dart run day_generator.dart <day>` <br>
-This will create an input file and a solution file with all the needed boilerplate to have a quick start. It also adds the solution to the corresponding index file, so the solution get imported into `main` automatically. 
+This will create an input file and a solution file with all the needed boilerplate to have a quick start. It also adds the solution to the corresponding index file, so the solution get imported into `main` automatically.
 
 ### Main
 To add a new solution, all you have to do is add `DayXX()` to the `day` List. Running main automatically prints either all your solutions, or just the last one, depending on your settings.
@@ -45,7 +45,7 @@ When using the Boilerplate generator, everything is done for you automatically. 
 ### Helper Packages
 **Tuple** enables operations on pairs/triplets etc of any type. Absolutely needed for most of the puzzles.
 **Collection** provides many methods for ...collections... Most importantly, a `groupBy` and a collection equality interface.
-**Quiver** is an awesome toolbox of helper methods for Dart. We mostly use `/iterables` (similar to Pythons `itertools`). 
+**Quiver** is an awesome toolbox of helper methods for Dart. We mostly use `/iterables` (similar to Pythons `itertools`).
 
 ## Contributing
 Contributing is greatly appreciated, just fork this project and create a Pull Request, or open an Issue!
