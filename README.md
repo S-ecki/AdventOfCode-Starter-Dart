@@ -6,25 +6,48 @@ This is a Starter project for [AdventOfCode](https://adventofcode.com/2023), wri
 
 ## How to use
 
-The code is commented abundantly, but you can find an overview about the features here as well.
+Feel free to fork this repository to use it as a starting point for your own solutions.
 
 ### Setup
 
-Please visit the [AdventOfCode](https://adventofcode.com/2023) site and log in. After that, get your cookie from the browser, and add it to the day_generator.dart file´s `session` variable. This will allow the script to populate your input file.
+Please visit the [AdventOfCode](https://adventofcode.com) site and log in. 
+
+After that, get your session token from the cookie:
+- Open DevTools (F12)
+- "Application" -> Cookies -> https://adventofcode.com
+- Copy the value of the `session` cookie
+
+Add the value to the `session` variable in the `day_generator.dart` file . This will allow the script to populate your input file.
+
+
+### Naming conventions
+
+When using the Boilerplate generator, everything is done for you automatically. However, if you create a solution or input file by yourself: make sure it has a 2-digit number. Concretely, pad days 1-9 as `Day01.dart` for solutions and `aoc01.txt` for input.
+
 
 ### Boilterplate Generation
 
-In the root of your directory, run `dart run day_generator.dart <day>`
+In the root of your directory, run 
+```dart
+dart run day_generator.dart <day>
+```
 
 This will create an input file and a solution file with all the needed boilerplate to have a quick start. It also adds the solution to the corresponding index file, so the solution get imported into `main` automatically.
 
 ### Main
 
-To add a new solution, all you have to do is add `DayXX()` to the `day` List. Running main automatically prints either all your solutions, or just the last one, depending on your settings.
+**To add a new solution, all you have to do is add `DayXX()` to the `day` List.**
+
+Running main automatically prints either all your solutions, or just the last one, depending on your settings.
 
 It also measures the time it takes to run each solution, and prints it to the console.
 
-You can run the main file by running `dart run main.dart` or `dart main.dart` in the root of your directory.
+You can run the main file by running 
+```dart
+dart run main.dart
+```
+in the root of your directory.
+
 By default the main file will only show the last solution. If you want to see all of them, you can use the `-a` or `--all` flag.
 You can list all the command line arguments by using the `-h` or `--help` flag.
 
@@ -48,10 +71,6 @@ A place to store useful parsing operations, like creating a `List<int>` from a `
 ### Field Class
 
 A helper class for 2D data, as often present in AoC. Any data can be respresented. For Integers specifically, there are convenience methods in `IntegerField`. For all available methods, have a look at the abundantly-documented code.
-
-### Naming conventions
-
-When using the Boilerplate generator, everything is done for you automatically. However, if you create a solution or input file by yourself: make sure it has a 2-digit number. Concretely, pad days 1-9 as `Day01.dart` for solutions and `aoc01.txt` for input.
 
 ### Helper Packages
 
