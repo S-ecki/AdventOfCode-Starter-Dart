@@ -16,23 +16,86 @@ class Day01 extends GenericDay {
   /// The return type of this is `dynamic` for [GenericDay], so you can decide
   /// on a day-to-day basis what this function should return.
   @override
-  List<int> parseInput() {
+  List<String> parseInput() {
     final lines = input.getPerLine();
     // exemplary usage of ParseUtil class
-    return ParseUtil.stringListToIntList(lines);
+    return lines;
   }
 
   /// The `solvePartX` methods always return a int, the puzzle solution. This
   /// solution will be printed in main.
   @override
   int solvePart1() {
-    // TODO implement
-    return 0;
+    final input1 = parseInput();
+
+    return input1.map(
+      (e) {
+        final firstDigit = int.parse(e[e.indexOf(RegExp(r'\d'))]);
+        final lastDigit = int.parse(e[e.lastIndexOf(RegExp(r'\d'))]);
+
+        return firstDigit * 10 + lastDigit;
+      },
+    ).sum;
   }
 
   @override
   int solvePart2() {
-    // TODO implement
-    return 0;
+    const List<({String pattern, int number})> patternsAsNumbers = [
+      (pattern: 'one', number: 1),
+      (pattern: '1', number: 1),
+      (pattern: 'two', number: 2),
+      (pattern: '2', number: 2),
+      (pattern: 'three', number: 3),
+      (pattern: '3', number: 3),
+      (pattern: 'four', number: 4),
+      (pattern: '4', number: 4),
+      (pattern: 'five', number: 5),
+      (pattern: '5', number: 5),
+      (pattern: 'six', number: 6),
+      (pattern: '6', number: 6),
+      (pattern: 'seven', number: 7),
+      (pattern: '7', number: 7),
+      (pattern: 'eight', number: 8),
+      (pattern: '8', number: 8),
+      (pattern: 'nine', number: 9),
+      (pattern: '9', number: 9),
+    ];
+
+    final input2 = parseInput();
+
+    return input2.map(
+      (e) {
+        final List<({int index, String pattern, int number})>
+            patternsThatMatchOrderedByIndex = patternsAsNumbers
+                .where(
+                  (patternAsNumber) => e.contains(patternAsNumber.pattern),
+                )
+                .map(
+                  (patternAsNumber) {
+                    final allMatches =
+                        RegExp(patternAsNumber.pattern).allMatches(e);
+                    return allMatches
+                        .map(
+                          (match) => (
+                            index: match.start,
+                            pattern: patternAsNumber.pattern,
+                            number: patternAsNumber.number,
+                          ),
+                        )
+                        .toList();
+                  },
+                )
+                .toList()
+                .flattened
+                .sorted(
+                  (a, b) => a.index.compareTo(b.index),
+                );
+
+        final firstDigit = patternsThatMatchOrderedByIndex.first.number;
+        final lastDigit = patternsThatMatchOrderedByIndex.last.number;
+
+        return firstDigit * 10 + lastDigit;
+      },
+    ).sum;
   }
 }
