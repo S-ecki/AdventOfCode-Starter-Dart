@@ -6,6 +6,26 @@ class InputUtil {
   InputUtil(int day)
       : _inputAsString = _readInputDay(day),
         _inputAsList = _readInputDayAsList(day);
+
+  /// Reads the entire input contents as one String.
+  /// This is useful for parsing the test input.
+  ///
+  /// Example:
+  /// ```dart
+  /// final input = InputUtil.fromMultiLineString('''
+  /// two1nine
+  /// eightwothree
+  /// abcone2threexyz
+  /// xtwone3four
+  /// 4nineeightseven2
+  /// zoneight234
+  /// 7pqrstsixteen
+  /// ''');
+  /// final lines = input.getPerLine();
+  InputUtil.fromMultiLineString(String input)
+      : _inputAsString = input,
+        _inputAsList = input.split('\n');
+
   final String _inputAsString;
   final List<String> _inputAsList;
 
