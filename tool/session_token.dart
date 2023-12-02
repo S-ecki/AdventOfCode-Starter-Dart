@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_slow_async_io
-
 import 'dart:io';
 
 const aocPath = '.dart_tool/aoc';
