@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'tool/session_token.dart';
+
 /// Small Program to be used to generate files and boilerplate for a given day.\
 /// Call with `dart run day_generator.dart <day>`
 void main(List<String?> args) async {
   const year = '2023';
-  const session = '<your session cookie here>';
+  final session = getSessionToken();
 
   if (args.length > 1) {
     print('Please call with: <dayNumber>');
