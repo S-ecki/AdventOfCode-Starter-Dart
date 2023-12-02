@@ -25,7 +25,7 @@ Add the value to the `session` variable in the `day_generator.dart` file . This 
 When using the Boilerplate generator, everything is done for you automatically. However, if you create a solution or input file by yourself: make sure it has a 2-digit number. Concretely, pad days 1-9 as `Day01.dart` for solutions and `aoc01.txt` for input.
 
 
-### Boilterplate Generation
+### Boilerplate Generation
 
 In the root of your directory, run 
 ```dart
@@ -70,7 +70,7 @@ A place to store useful parsing operations, like creating a `List<int>` from a `
 
 ### Field Class
 
-A helper class for 2D data, as often present in AoC. Any data can be respresented. For Integers specifically, there are convenience methods in `IntegerField`. For all available methods, have a look at the abundantly-documented code.
+A helper class for 2D data, as often present in AoC. Any data can be represented. For Integers specifically, there are convenience methods in `IntegerField`. For all available methods, have a look at the abundantly-documented code.
 
 ### Helper Packages
 
