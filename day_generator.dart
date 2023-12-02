@@ -124,11 +124,14 @@ import '../solutions/day$day.dart';
 
 // *******************************************************************
 // Fill out the variables below according to the puzzle description!
-// The test code should usually not need to be changed.
+// The test code should usually not need to be changed, apart from uncommenting
+// the puzzle tests for regression testing.
 // *******************************************************************
 
 /// Paste in the small example that is given for the FIRST PART of the puzzle.
 /// It will be evaluated again the `_exampleSolutionPart1` below.
+/// Make sure to respect the multiline string format to avoid additional 
+/// newlines at the end.
 const _exampleInput1 = \'''
 \''';
 
@@ -174,8 +177,8 @@ void main() {
     'Day $day - Puzzle Input',
     () {
       final day = Day$day();
-      test('Part 1', () => expect(day.solvePart1(), _puzzleSolutionPart1));
-      test('Part 2', () => expect(day.solvePart2(), _puzzleSolutionPart2));
+      // test('Part 1', () => expect(day.solvePart1(), _puzzleSolutionPart1));
+      // test('Part 2', () => expect(day.solvePart2(), _puzzleSolutionPart2));
     },
   );
 }
