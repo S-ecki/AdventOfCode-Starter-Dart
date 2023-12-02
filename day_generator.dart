@@ -152,12 +152,14 @@ const _exampleSolutionPart2 = 0;
 /// The actual solution for the FIRST PART of the puzzle, based on your input.
 /// This can only be filled out after you have solved the puzzle and is used
 /// for regression testing when refactoring.
-const _puzzleSolutionPart1 = 0;
+/// As long as the variable is `null`, the tests will be skipped.
+const _puzzleSolutionPart1 = null;
 
 /// The actual solution for the SECOND PART of the puzzle, based on your input.
 /// This can only be filled out after you have solved the puzzle and is used
 /// for regression testing when refactoring.
-const _puzzleSolutionPart2 = 0;
+/// As long as the variable is `null`, the tests will be skipped.
+const _puzzleSolutionPart2 = null;
 
 void main() {
   group(
@@ -177,8 +179,20 @@ void main() {
     'Day $day - Puzzle Input',
     () {
       final day = Day$day();
-      // test('Part 1', () => expect(day.solvePart1(), _puzzleSolutionPart1));
-      // test('Part 2', () => expect(day.solvePart2(), _puzzleSolutionPart2));
+      test(
+        'Part 1',
+        skip: _puzzleSolutionPart1 == null
+            ? 'Skipped because _puzzleSolutionPart1 is null'
+            : false,
+        () => expect(day.solvePart1(), _puzzleSolutionPart1),
+      );
+      test(
+        'Part 2',
+        skip: _puzzleSolutionPart2 == null
+            ? 'Skipped because _puzzleSolutionPart2 is null'
+            : false,
+        () => expect(day.solvePart1(), _puzzleSolutionPart2),
+      );
     },
   );
 }
