@@ -61,35 +61,29 @@ class Day01 extends GenericDay {
       (pattern: '9', number: 9),
     ];
 
-    final input2 = parseInput();
-
-    return input2.map(
+    return parseInput().map(
       (e) {
-        final List<({int index, String pattern, int number})>
-            patternsThatMatchOrderedByIndex = patternsAsNumbers
-                .where(
-                  (patternAsNumber) => e.contains(patternAsNumber.pattern),
-                )
-                .map(
-                  (patternAsNumber) {
-                    final allMatches =
-                        RegExp(patternAsNumber.pattern).allMatches(e);
-                    return allMatches
-                        .map(
-                          (match) => (
-                            index: match.start,
-                            pattern: patternAsNumber.pattern,
-                            number: patternAsNumber.number,
-                          ),
-                        )
-                        .toList();
-                  },
-                )
-                .toList()
-                .flattened
-                .sorted(
-                  (a, b) => a.index.compareTo(b.index),
-                );
+        final patternsThatMatchOrderedByIndex = patternsAsNumbers
+            .map(
+              (patternAsNumber) {
+                final allMatches =
+                    RegExp(patternAsNumber.pattern).allMatches(e);
+                return allMatches
+                    .map(
+                      (match) => (
+                        index: match.start,
+                        pattern: patternAsNumber.pattern,
+                        number: patternAsNumber.number,
+                      ),
+                    )
+                    .toList();
+              },
+            )
+            .toList()
+            .flattened
+            .sorted(
+              (a, b) => a.index.compareTo(b.index),
+            );
 
         final firstDigit = patternsThatMatchOrderedByIndex.first.number;
         final lastDigit = patternsThatMatchOrderedByIndex.last.number;
