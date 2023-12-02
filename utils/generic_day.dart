@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'package:timing/timing.dart';
 
 import 'input_util.dart';
@@ -10,7 +11,14 @@ typedef SolutionWithDuration = (int, Duration);
 abstract class GenericDay {
   GenericDay(this.day) : input = InputUtil(day);
   final int day;
-  final InputUtil input;
+  InputUtil input;
+
+  /// This setter must only be used to mutate the input of an existing day
+  /// implementation for testing purposes.
+  @visibleForTesting
+  // ignore: avoid_setters_without_getters
+  set inputForTesting(String example) =>
+      input = InputUtil.fromMultiLineString(example);
 
   dynamic parseInput();
   int solvePart1();
