@@ -20,11 +20,6 @@ After that, get your session token from the cookie:
 Add the value to the `session` variable in the `day_generator.dart` file . This will allow the script to populate your input file.
 
 
-### Naming conventions
-
-When using the Boilerplate generator, everything is done for you automatically. However, if you create a solution or input file by yourself: make sure it has a 2-digit number. Concretely, pad days 1-9 as `Day01.dart` for solutions and `aoc01.txt` for input.
-
-
 ### Boilerplate Generation
 
 In the root of your directory, run 
@@ -32,7 +27,7 @@ In the root of your directory, run
 dart run day_generator.dart <day>
 ```
 
-This will create an input file and a solution file with all the needed boilerplate to have a quick start. It also adds the solution to the corresponding index file, so the solution get imported into `main` automatically.
+This will create an input and test file and a solution file with all the needed boilerplate to have a quick start. It also adds the solution to the corresponding index file, so the solution get imported into `main` automatically.
 
 ### Main
 
@@ -50,6 +45,23 @@ in the root of your directory.
 
 By default the main file will only show the last solution. If you want to see all of them, you can use the `-a` or `--all` flag.
 You can list all the command line arguments by using the `-h` or `--help` flag.
+
+### Tests
+
+A test file is automatically generated for each day. It contains tests for both parts of the example and the real input. 
+
+All you have to do is **fill out the variables given at the top of the test file.**
+
+---
+
+## Class Documentation
+
+Below you can find a short documentation of the classes and methods provided by this starter project.
+
+### Naming conventions
+
+When using the Boilerplate generator, everything is done for you automatically. However, if you create a solution or input file by yourself: make sure it has a 2-digit number. Concretely, pad days 1-9 as `Day01.dart` for solutions and `aoc01.txt` for input.
+
 
 ### Generic Day
 

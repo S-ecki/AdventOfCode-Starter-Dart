@@ -19,8 +19,7 @@ class InputUtil {
   /// xtwone3four
   /// 4nineeightseven2
   /// zoneight234
-  /// 7pqrstsixteen
-  /// ''');
+  /// 7pqrstsixteen''');
   /// final lines = input.getPerLine();
   InputUtil.fromMultiLineString(String input)
       : _inputAsString = input,
