@@ -16,7 +16,10 @@ String getSessionToken() {
 
 String? _readSessionToken() {
   try {
-    return File(sessionTokenPath).readAsStringSync();
+    final token = File(sessionTokenPath).readAsStringSync();
+    if (token.isNotEmpty) {
+      return token;
+    }
   } catch (e) {
     print('Error reading session token: $e');
   }

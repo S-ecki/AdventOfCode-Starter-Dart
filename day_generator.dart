@@ -80,6 +80,14 @@ void main(List<String?> args) async {
     );
     request.cookies.add(Cookie('session', session));
     final response = await request.close();
+    if (response.statusCode != 200) {
+      print('''
+Received status code ${response.statusCode} from server.
+
+You might need to refresh your session token.
+You can do so by deleting the file at $sessionTokenPath and restarting the generator.''');
+      return;
+    }
     final dataPath = 'input/aoc$dayNumber.txt';
     // unawaited(File(dataPath).create());
     await response.pipe(File(dataPath).openWrite());
