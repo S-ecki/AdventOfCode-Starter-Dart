@@ -40,7 +40,7 @@ class Day01 extends GenericDay {
 
   @override
   int solvePart2() {
-    const List<({String pattern, int number})> patternsAsNumbers = [
+    const patternsAsNumbers = [
       (pattern: 'one', number: 1),
       (pattern: '1', number: 1),
       (pattern: 'two', number: 2),
