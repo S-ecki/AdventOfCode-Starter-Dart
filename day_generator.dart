@@ -35,13 +35,17 @@ void main(List<String?> args) async {
   // Create lib file
   final dayFileName = 'day$dayNumber.dart';
   unawaited(
-    File('solutions/$dayFileName').writeAsString(dayTemplate(dayNumber)),
+    File('solutions/$dayFileName')
+        .create(recursive: true)
+        .then((file) => file.writeAsString(_dayTemplate(dayNumber!))),
   );
 
   // Create test file
   final testFileName = 'day${dayNumber}_test.dart';
   unawaited(
-    File('test/$testFileName').writeAsString(_testTemplate(dayNumber)),
+    File('test/$testFileName')
+        .create(recursive: true)
+        .then((file) => file.writeAsString(_testTemplate(dayNumber!))),
   );
 
   final exportFile = File('solutions/index.dart');
@@ -84,7 +88,7 @@ void main(List<String?> args) async {
   print('All set, Good luck!');
 }
 
-String dayTemplate(String dayNumber) {
+String _dayTemplate(String dayNumber) {
   return '''
 import '../utils/index.dart';
 
