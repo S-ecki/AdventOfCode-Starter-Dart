@@ -1,4 +1,5 @@
-.dart-tool
+.dart_tool
 .dart_tool/package_config.json
 .dart_tool/aoc
 .packages
+build/
