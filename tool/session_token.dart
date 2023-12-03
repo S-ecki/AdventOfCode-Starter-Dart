@@ -2,8 +2,7 @@ import 'dart:io';
 
 import 'package:quiver/strings.dart';
 
-const aocPath = '.dart_tool/aoc';
-const sessionTokenPath = '$aocPath/.session_token';
+const sessionTokenPath = '.dart_tool/aoc/.session_token';
 
 String getSessionToken() {
   final sessionToken = _readSessionToken();
@@ -30,7 +29,7 @@ String? _readSessionToken() {
 
 void _writeSessionToken(String token) {
   try {
-    File('$aocPath/$sessionTokenPath')
+    File(sessionTokenPath)
         .create(recursive: true)
         .then((file) => file.writeAsStringSync(token));
   } catch (e) {
