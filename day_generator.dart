@@ -139,7 +139,7 @@ const _exampleInput1 = \'''
 /// It will be evaluated against the `_exampleSolutionPart2` below.
 ///
 /// In case the second part uses the same example, uncomment below line instead:
-// const _exampleInput2 = _exampleInput;
+// const _exampleInput2 = _exampleInput1;
 const _exampleInput2 = \'''
 \''';
 
@@ -191,7 +191,7 @@ void main() {
         skip: _puzzleSolutionPart2 == null
             ? 'Skipped because _puzzleSolutionPart2 is null'
             : false,
-        () => expect(day.solvePart1(), _puzzleSolutionPart2),
+        () => expect(day.solvePart2(), _puzzleSolutionPart2),
       );
     },
   );
