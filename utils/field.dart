@@ -143,6 +143,18 @@ extension IntegerField on Field<int> {
   }
 }
 
+extension StringField on Field<String> {
+  bool checkNeighboursForPattern(int x, int y, Pattern pattern) {
+    final neighbours = this.neighbours(x, y);
+    for (final neighbour in neighbours) {
+      if (this.getValueAtPosition(neighbour).contains(pattern)) {
+        return true;
+      }
+    }
+    return false;
+  }
+}
+
 extension CoordinateLocator on Position {
   int get x => item1;
   int get y => item2;
