@@ -28,10 +28,9 @@ String? _readSessionToken() {
 
 void _writeSessionToken(String token) {
   try {
-    if (!Directory(aocPath).existsSync()) {
-      Directory(aocPath).createSync(recursive: true);
-    }
-    File(sessionTokenPath).writeAsStringSync(token);
+    File('$aocPath/$sessionTokenPath')
+        .create(recursive: true)
+        .then((file) => file.writeAsStringSync(token)),
   } catch (e) {
     print('Error writing session token: $e');
   }
