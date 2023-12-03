@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:quiver/strings.dart';
+
 const aocPath = '.dart_tool/aoc';
 const sessionTokenPath = '$aocPath/.session_token';
 
@@ -30,7 +32,7 @@ void _writeSessionToken(String token) {
   try {
     File('$aocPath/$sessionTokenPath')
         .create(recursive: true)
-        .then((file) => file.writeAsStringSync(token)),
+        .then((file) => file.writeAsStringSync(token));
   } catch (e) {
     print('Error writing session token: $e');
   }
@@ -40,11 +42,11 @@ String _promptSessionToken() {
   stdout.write(_kSessionTokenPromptMessage);
   final token = stdin.readLineSync();
   stdout.writeln();
-  if (token == null || token.isEmpty) {
+  if (isBlank(token)) {
     print('Session token cannot be empty!');
     return _promptSessionToken();
   }
-  return token;
+  return token!;
 }
 
 const String _kSessionTokenPromptMessage = '''
