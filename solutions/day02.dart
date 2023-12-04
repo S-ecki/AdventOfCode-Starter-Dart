@@ -1,13 +1,12 @@
 import '../utils/index.dart';
 
 sealed class Cube {
-  static final int redMaxCubes = 12;
-  static final int greenMaxCubes = 13;
-  static final int blueMaxCubes = 14;
+  static const int redMaxCubes = 12;
+  static const int greenMaxCubes = 13;
+  static const int blueMaxCubes = 14;
 
   static Cube parse(String cube) {
-    final pattern = RegExp(r'(\d+) (\w+)');
-    cube = cube.trim();
+    final pattern = RegExp(r'\s*(\d+) (\w+)\s*');
 
     final matches = pattern.allMatches(cube);
     if (matches.isEmpty) {
@@ -27,24 +26,24 @@ sealed class Cube {
 }
 
 class RedCube implements Cube {
-  final int cubes;
   RedCube(this.cubes);
+  final int cubes;
 }
 
 class GreenCube implements Cube {
-  final int cubes;
   GreenCube(this.cubes);
+  final int cubes;
 }
 
 class BlueCube implements Cube {
-  final int cubes;
   BlueCube(this.cubes);
+  final int cubes;
 }
 
 bool isCubeValid(Cube cube) => switch (cube) {
-      RedCube(cubes: var count) => count <= Cube.redMaxCubes,
-      GreenCube(cubes: var count) => count <= Cube.greenMaxCubes,
-      BlueCube(cubes: var count) => count <= Cube.blueMaxCubes,
+      RedCube(cubes: final count) => count <= Cube.redMaxCubes,
+      GreenCube(cubes: final count) => count <= Cube.greenMaxCubes,
+      BlueCube(cubes: final count) => count <= Cube.blueMaxCubes,
     };
 
 class Day02 extends GenericDay {
@@ -67,11 +66,11 @@ class Day02 extends GenericDay {
             final gameId = int.parse(
               RegExp(r'(\w) (\d+)').firstMatch(gameHeader)!.group(2)!,
             );
-            final List<Cube> gameCubes = gameBody
+            final gameCubes = gameBody
                     ?.split(';')
                     .map(
                       (cubeSet) => cubeSet.split(',').map(
-                            (cube) => Cube.parse(cube),
+                            Cube.parse,
                           ),
                     )
                     .flattened
@@ -98,11 +97,11 @@ class Day02 extends GenericDay {
         final gameId = int.parse(
           RegExp(r'(\w) (\d+)').firstMatch(gameHeader)!.group(2)!,
         );
-        final List<Cube> gameCubes = gameBody
+        final gameCubes = gameBody
                 ?.split(';')
                 .map(
                   (cubeSet) => cubeSet.split(',').map(
-                        (cube) => Cube.parse(cube),
+                        Cube.parse,
                       ),
                 )
                 .flattened

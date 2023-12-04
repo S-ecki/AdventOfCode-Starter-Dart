@@ -1,15 +1,15 @@
 import 'package:quiver/iterables.dart';
-import 'package:tuple/tuple.dart';
 
-typedef Position = Tuple2<int, int>;
+typedef Position = (int x, int y);
 typedef VoidFieldCallback = void Function(int, int);
 
 /// A helper class for easier work with 2D data.
 class Field<T> {
   Field(List<List<T>> field)
-      : assert(field.length > 0),
-        assert(field[0].length > 0),
-        // creates a deep copy by value from given field to prevent unwarranted overrides
+      : assert(field.isNotEmpty, 'Field must not be empty'),
+        assert(field[0].isNotEmpty, 'First position must not be empty'),
+        // creates a deep copy by value from given field to prevent unwarranted
+        // overrides
         field = List<List<T>>.generate(
           field.length,
           (y) => List<T>.generate(field[0].length, (x) => field[y][x]),
@@ -22,25 +22,28 @@ class Field<T> {
   int width;
 
   /// Returns the value at the given position.
-  T getValueAtPosition(Position position) => field[position.y][position.x];
+  T getValueAtPosition(Position position) {
+    final (x, y) = position;
+    return field[y][x];
+  }
 
   /// Returns the value at the given coordinates.
-  T getValueAt(int x, int y) => getValueAtPosition(Position(x, y));
+  T getValueAt(int x, int y) => getValueAtPosition((x, y));
 
   /// Sets the value at the given Position.
-  setValueAtPosition(Position position, T value) =>
-      field[position.y][position.x] = value;
+  void setValueAtPosition(Position position, T value) {
+    final (x, y) = position;
+    field[y][x] = value;
+  }
 
   /// Sets the value at the given coordinates.
-  setValueAt(int x, int y, T value) =>
-      setValueAtPosition(Position(x, y), value);
+  void setValueAt(int x, int y, T value) => setValueAtPosition((x, y), value);
 
   /// Returns whether the given position is inside of this field.
-  bool isOnField(Position position) =>
-      position.x >= 0 &&
-      position.y >= 0 &&
-      position.x < width &&
-      position.y < height;
+  bool isOnField(Position position) {
+    final (x, y) = position;
+    return x >= 0 && y >= 0 && x < width && y < height;
+  }
 
   /// Returns the whole row with given row index.
   Iterable<T> getRow(int row) => field[row];
@@ -55,9 +58,9 @@ class Field<T> {
   T get maxValue => max<T>(field.expand((element) => element))!;
 
   /// Executes the given callback for every position on this field.
-  forEach(VoidFieldCallback callback) {
-    for (int y = 0; y < height; y++) {
-      for (int x = 0; x < width; x++) {
+  void forEach(VoidFieldCallback callback) {
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
         callback(x, y);
       }
     }
@@ -69,23 +72,29 @@ class Field<T> {
       .fold<int>(0, (acc, elem) => elem == searched ? acc + 1 : acc);
 
   /// Executes the given callback for all given positions.
-  forPositions(
+  void forPositions(
     Iterable<Position> positions,
     VoidFieldCallback callback,
   ) {
-    positions.forEach((position) => callback(position.x, position.y));
+    for (final (x, y) in positions) {
+      callback(x, y);
+    }
   }
 
   /// Returns all adjacent cells to the given position. This does `NOT` include
   /// diagonal neighbours.
   Iterable<Position> adjacent(int x, int y) {
     return <Position>{
-      Position(x, y - 1),
-      Position(x, y + 1),
-      Position(x - 1, y),
-      Position(x + 1, y),
+      (x, y - 1),
+      (x, y + 1),
+      (x - 1, y),
+      (x + 1, y),
     }..removeWhere(
-        (pos) => pos.x < 0 || pos.y < 0 || pos.x >= width || pos.y >= height);
+        (pos) {
+          final (x, y) = pos;
+          return x < 0 || y < 0 || x >= width || y >= height;
+        },
+      );
   }
 
   /// Returns all positional neighbours of a point. This includes the adjacent
@@ -93,16 +102,20 @@ class Field<T> {
   Iterable<Position> neighbours(int x, int y) {
     return <Position>{
       // positions are added in a circle, starting at the top middle
-      Position(x, y - 1),
-      Position(x + 1, y - 1),
-      Position(x + 1, y),
-      Position(x + 1, y + 1),
-      Position(x, y + 1),
-      Position(x - 1, y + 1),
-      Position(x - 1, y),
-      Position(x - 1, y - 1),
+      (x, y - 1),
+      (x + 1, y - 1),
+      (x + 1, y),
+      (x + 1, y + 1),
+      (x, y + 1),
+      (x - 1, y + 1),
+      (x - 1, y),
+      (x - 1, y - 1),
     }..removeWhere(
-        (pos) => pos.x < 0 || pos.y < 0 || pos.x >= width || pos.y >= height);
+        (pos) {
+          final (x, y) = pos;
+          return x < 0 || y < 0 || x >= width || y >= height;
+        },
+      );
   }
 
   /// Returns a deep copy by value of this [Field].
@@ -116,21 +129,21 @@ class Field<T> {
 
   @override
   String toString() {
-    String result = '';
+    final result = StringBuffer();
     for (final row in field) {
       for (final elem in row) {
-        result += elem.toString();
+        result.write(elem.toString());
       }
-      result += '\n';
+      result.write('\n');
     }
-    return result;
+    return result.toString();
   }
 }
 
-/// Extension for [Field]s where [T] is of type [int].
+/// Extension for [Field]s where `T` is of type [int].
 extension IntegerField on Field<int> {
   /// Increments the values of Position `x` `y`.
-  increment(int x, int y) => this.setValueAt(x, y, this.getValueAt(x, y) + 1);
+  dynamic increment(int x, int y) => setValueAt(x, y, getValueAt(x, y) + 1);
 
   /// Convenience method to create a Field from a single String, where the
   /// String is a "block" of integers.
@@ -143,19 +156,18 @@ extension IntegerField on Field<int> {
   }
 }
 
+// extension CoordinateLocator on Position {
+//   int get x => item1;
+//   int get y => item2;
+// }
 extension StringField on Field<String> {
   bool checkNeighboursForPattern(int x, int y, Pattern pattern) {
     final neighbours = this.neighbours(x, y);
     for (final neighbour in neighbours) {
-      if (this.getValueAtPosition(neighbour).contains(pattern)) {
+      if (getValueAtPosition(neighbour).contains(pattern)) {
         return true;
       }
     }
     return false;
   }
-}
-
-extension CoordinateLocator on Position {
-  int get x => item1;
-  int get y => item2;
 }

@@ -16,7 +16,7 @@ class Day03 extends GenericDay {
     final engineField = Field<String>(lines);
     var sum = 0;
     final numberPattern = RegExp(r'\d');
-    final symbolPattern = RegExp(r'[^0-9.]');
+    final symbolPattern = RegExp('[^0-9.]');
 
     var y = 0;
     while (y < engineField.height) {
@@ -62,10 +62,10 @@ class Day03 extends GenericDay {
     final lines = input.getPerLine().map((line) => line.split('')).toList();
     final engineField = Field<String>(lines);
     final numberPattern = RegExp(r'\d');
-    final symbolPattern = RegExp(r'[^0-9.]');
+    final symbolPattern = RegExp('[^0-9.]');
 
     final partNumbersPositions =
-        HashMap<({int number, Position start}), List<Position>>();
+        HashMap<({int number, (int, int) start}), List<(int, int)>>();
 
     var y = 0;
     while (y < engineField.height) {
@@ -78,8 +78,8 @@ class Day03 extends GenericDay {
             y,
             symbolPattern,
           );
-          var positions = <Position>[Position(x, y)];
-          final start = Position(x, y);
+          final positions = <(int, int)>[(x, y)];
+          final start = (x, y);
 
           x++;
           while (x < engineField.width &&
@@ -91,7 +91,7 @@ class Day03 extends GenericDay {
                   symbolPattern,
                 );
 
-            positions.add(Position(x, y));
+            positions.add((x, y));
             number = number * 10 + int.parse(engineField.getValueAt(x, y));
             x++;
           }
@@ -144,11 +144,11 @@ class Day03 extends GenericDay {
         return partNumbersPositions[partNumber]!.contains(neighbour);
       }).toList();
 
-      overlappingNumbers.forEach((partNumber) {
+      for (final partNumber in overlappingNumbers) {
         if (!partNumberGearWeight.containsKey(partNumber)) {
           partNumberGearWeight[partNumber] = true;
         }
-      });
+      }
     }
 
     partNumberGearWeight.forEach((partNumber, weight) {

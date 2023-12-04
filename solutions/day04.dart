@@ -16,17 +16,14 @@ class Day04 extends GenericDay {
             .split(':')[1]
             .split('|')
             .map(
-              (part) => part
-                  .trim()
-                  .split(RegExp(r'\s+'))
-                  .map((n) => int.parse(n))
-                  .toList(),
+              (part) =>
+                  part.trim().split(RegExp(r'\s+')).map(int.parse).toList(),
             )
             .map((numbers) => numbers.toSet())
             .toList();
 
         final intersection = winningNumbers.intersection(myNumbers);
-        return intersection.length == 0 ? 0 : 1 << (intersection.length - 1);
+        return intersection.isEmpty ? 0 : 1 << (intersection.length - 1);
       },
     ).sum;
   }
@@ -43,11 +40,8 @@ class Day04 extends GenericDay {
         final [winningNumbers, myNumbers] = numbers
             .split('|')
             .map(
-              (part) => part
-                  .trim()
-                  .split(RegExp(r'\s+'))
-                  .map((n) => int.parse(n))
-                  .toList(),
+              (part) =>
+                  part.trim().split(RegExp(r'\s+')).map(int.parse).toList(),
             )
             .map((numbers) => numbers.toSet())
             .toList();
@@ -70,11 +64,11 @@ class Day04 extends GenericDay {
       ),
     );
 
-    for (var MapEntry(
+    for (final MapEntry(
           :key,
           value: (:count, :score),
         ) in cardMap.entries) {
-      final entailedCards = List.generate(
+      for (final entry in List.generate(
         score,
         (i) {
           final card = cardMap[key + i + 1]!;
@@ -84,11 +78,9 @@ class Day04 extends GenericDay {
             (count: card.count + count, score: card.score),
           );
         },
-      );
-
-      entailedCards.forEach(
-        (entry) => cardMap.update(entry.key, (value) => entry.value),
-      );
+      )) {
+        cardMap.update(entry.key, (value) => entry.value);
+      }
     }
 
     return cardMap.values

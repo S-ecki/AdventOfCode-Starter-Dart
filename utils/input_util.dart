@@ -1,17 +1,35 @@
 import 'dart:io';
 
-/// Automatically reads reads the contents of the input file for given [day]. \
+/// Automatically reads reads the contents of the input file for given `day`. \
 /// Note that file name and location must align.
 class InputUtil {
-  final String _inputAsString;
-  final List<String> _inputAsList;
-
   InputUtil(int day)
       : _inputAsString = _readInputDay(day),
         _inputAsList = _readInputDayAsList(day);
 
+  /// Reads the entire input contents as one String.
+  /// This is useful for parsing the test input.
+  ///
+  /// Example:
+  /// ```dart
+  /// final input = InputUtil.fromMultiLineString('''
+  /// two1nine
+  /// eightwothree
+  /// abcone2threexyz
+  /// xtwone3four
+  /// 4nineeightseven2
+  /// zoneight234
+  /// 7pqrstsixteen''');
+  /// final lines = input.getPerLine();
+  InputUtil.fromMultiLineString(String input)
+      : _inputAsString = input,
+        _inputAsList = input.split('\n');
+
+  final String _inputAsString;
+  final List<String> _inputAsList;
+
   static String _createInputPath(int day) {
-    String dayString = day.toString().padLeft(2, '0');
+    final dayString = day.toString().padLeft(2, '0');
     return './input/aoc$dayString.txt';
   }
 
