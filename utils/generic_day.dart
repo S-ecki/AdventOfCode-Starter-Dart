@@ -44,6 +44,6 @@ abstract class GenericDay {
 
   String _formatResult(SolutionWithDuration result) {
     final (solution, duration) = result;
-    return '$solution - Took ${duration.inMicroseconds} microseconds';
+    return '$solution - Took ${duration.inMilliseconds} milliseconds';
   }
 }
