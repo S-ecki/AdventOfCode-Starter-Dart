@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 import 'package:timing/timing.dart';
 
-import 'input_util.dart';
+import '../utils/input_util.dart';
 
 typedef SolveFunction = int Function();
 typedef SolutionWithDuration = (int, Duration);
