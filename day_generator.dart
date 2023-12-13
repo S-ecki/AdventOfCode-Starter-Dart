@@ -1,11 +1,10 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'tool/session_token.dart';
 
 /// Small Program to be used to generate files and boilerplate for a given day.\
 /// Call with `dart run day_generator.dart <day>`
-void main(List<String?> args) async {
+Future<void> main(List<String?> args) async {
   const year = '2023';
   final session = getSessionToken();
 
@@ -14,7 +13,7 @@ void main(List<String?> args) async {
     return;
   }
 
-  String? dayNumber;
+  String dayNumber;
 
   // input through terminal
   if (args.isEmpty) {
@@ -31,24 +30,38 @@ void main(List<String?> args) async {
     dayNumber = int.parse(args[0]!).toString().padLeft(2, '0');
   }
 
-  // inform user
-  print('Creating day: $dayNumber');
-
   // Create lib file
-  final dayFileName = 'day$dayNumber.dart';
-  unawaited(
-    File('solutions/$dayFileName')
-        .create(recursive: true)
-        .then((file) => file.writeAsString(_dayTemplate(dayNumber!))),
-  );
+  final dayFileName = 'solutions/day$dayNumber.dart';
+  final dayFile = File(dayFileName);
+
+  try {
+    await dayFile.create(
+      recursive: true,
+      exclusive: true,
+    );
+    print('Generating $dayFileName');
+    await dayFile.writeAsString(_dayTemplate(dayNumber));
+  } on PathExistsException {
+    if (_promptForOverwrite(dayFileName)) {
+      await dayFile.writeAsString(_dayTemplate(dayNumber));
+    }
+  }
 
   // Create test file
-  final testFileName = 'day${dayNumber}_test.dart';
-  unawaited(
-    File('test/$testFileName')
-        .create(recursive: true)
-        .then((file) => file.writeAsString(_testTemplate(dayNumber!))),
-  );
+  final testFileName = 'test/day${dayNumber}_test.dart';
+  final testFile = File(testFileName);
+  try {
+    await testFile.create(
+      recursive: true,
+      exclusive: true,
+    );
+    print('Generating $testFileName');
+    await testFile.writeAsString(_testTemplate(dayNumber));
+  } on PathExistsException {
+    if (_promptForOverwrite(testFileName)) {
+      await testFile.writeAsString(_testTemplate(dayNumber));
+    }
+  }
 
   final exportFile = File('solutions/index.dart');
   final exports = exportFile.readAsLinesSync();
@@ -72,8 +85,9 @@ void main(List<String?> args) async {
 
   // Create input file
   print('Loading input from adventofcode.com...');
+  final client = HttpClient();
   try {
-    final request = await HttpClient().getUrl(
+    final request = await client.getUrl(
       Uri.parse(
         'https://adventofcode.com/$year/day/${int.parse(dayNumber)}/input',
       ),
@@ -89,13 +103,22 @@ You can do so by deleting the file at $sessionTokenPath and restarting the gener
       return;
     }
     final dataPath = 'input/aoc$dayNumber.txt';
-    // unawaited(File(dataPath).create());
     await response.pipe(File(dataPath).openWrite());
   } catch (e) {
     print('Error loading file: $e');
+  } finally {
+    client.close();
   }
 
   print('All set, Good luck!');
+  return;
+}
+
+bool _promptForOverwrite(String fileName) {
+  print('$fileName already exists. Overwrite? Defaults to No.');
+  stdout.write('Yes(y)/No(n): ');
+  final answer = stdin.readLineSync();
+  return answer?.toLowerCase().startsWith('y') ?? false;
 }
 
 String _dayTemplate(String dayNumber) {
@@ -142,7 +165,7 @@ import '../solutions/day$day.dart';
 
 /// Paste in the small example that is given for the FIRST PART of the puzzle.
 /// It will be evaluated again the `_exampleSolutionPart1` below.
-/// Make sure to respect the multiline string format to avoid additional 
+/// Make sure to respect the multiline string format to avoid additional
 /// newlines at the end.
 const _exampleInput1 = \'''
 \''';
