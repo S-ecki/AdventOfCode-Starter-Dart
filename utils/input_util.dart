@@ -21,6 +21,7 @@ class InputUtil {
   /// zoneight234
   /// 7pqrstsixteen''');
   /// final lines = input.getPerLine();
+  /// ```
   InputUtil.fromMultiLineString(String input)
       : _inputAsString = input,
         _inputAsList = input.split('\n');
