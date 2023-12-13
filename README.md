@@ -1,6 +1,6 @@
-<img src="https://www.kindpng.com/picc/m/176-1766554_dart-programming-language-logo-hd-png-download.png" width="160" align="right">
+<img src="https://github.com/dart-lang.png" width="160" align="right" alt="Dart Logo">
 
-# AdventOfCode-Starter-Darts
+# AdventOfCode-Starter-Dart
 
 This is a Starter project for [AdventOfCode](https://adventofcode.com/2023), written in `Dart`. Feel free to use it for your own adventures with the christmas-themed puzzles!
 
@@ -12,11 +12,11 @@ Feel free to fork this repository to use it as a starting point for your own sol
 
 In the root of your directory, run
 
-```dart
+```console
 dart run day_generator.dart <day>
 ```
 
-This will request your session token if it has not been stored previously. More info can be found in the [Session token](<#Session token>) section.
+This will request your session token if it has not been stored previously. More info can be found in the [Session token](<#session-token>) section.
 
 This will create an input and test file and a solution file with all the needed boilerplate to have a quick start. It also adds the solution to the corresponding index file, so the solution get imported into `main` automatically.
 
@@ -29,7 +29,7 @@ Please visit the [AdventOfCode](https://adventofcode.com) site and log in.
 After that, get your session token from the cookie:
 
 - Open DevTools (F12)
-- "Application" -> Cookies -> https://adventofcode.com
+- "Application" -> Cookies -> <https://adventofcode.com>
 - Copy the value of the `session` cookie
 
 By default, the session token is stored in `.dart_tool/aoc/.session_token`. You can either store it there manually, or run the `day_generator.dart` script and paste it when prompted.
@@ -44,7 +44,7 @@ It also measures the time it takes to run each solution, and prints it to the co
 
 You can run the main file by running
 
-```dart
+```console
 dart run main.dart
 ```
 
@@ -67,7 +67,7 @@ Below you can find a short documentation of the classes and methods provided by 
 
 ### Naming conventions
 
-When using the Boilerplate generator, everything is done for you automatically. However, if you create a solution or input file by yourself: make sure it has a 2-digit number. Concretely, pad days 1-9 as `Day01.dart` for solutions and `aoc01.txt` for input.
+When using the Boilerplate generator, everything is done for you automatically. However, if you create a solution or input file by yourself: make sure it has a 2-digit number. Concretely, pad days 1-9 as `day01.dart` for solutions and `aoc01.txt` for input.
 
 ### Generic Day
 
@@ -80,7 +80,7 @@ Automatically reads the input files and provides different methods to parse it.
 - `.asString` to get the whole input as a single String
 - `.getPerLine()` splits on `\n` characters, returning a List with single lines as elements.
 - `.getPerWhitespace()` splits on `\s` and `\n`, essentially returning a List with all the single characters.
-- `.getBy(pattern)` lets you define your own split logic. It essentially calls Dart´s native `.split(pattern)`
+- `.getBy(pattern)` lets you define your own split logic. It essentially calls Dart's native `.split(pattern)`
 
 ### Parse Util
 
