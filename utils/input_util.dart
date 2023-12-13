@@ -1,3 +1,4 @@
+import 'dart:convert' show LineSplitter;
 import 'dart:io';
 
 /// Automatically reads reads the contents of the input file for given `day`. \
@@ -23,7 +24,7 @@ class InputUtil {
   /// final lines = input.getPerLine();
   InputUtil.fromMultiLineString(String input)
       : _inputAsString = input,
-        _inputAsList = input.split('\n');
+        _inputAsList = const LineSplitter().convert(input);
 
   final String _inputAsString;
   final List<String> _inputAsList;

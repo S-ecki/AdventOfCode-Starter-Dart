@@ -6,9 +6,9 @@ import '../utils/index.dart';
 /// Naming convention is set to pad any single-digit day with `0` to have proper
 /// ordering of files and correct mapping between input for days and the day
 /// files.
-class Day01 extends GenericDay {
+class Day00 extends GenericDay {
   // call the superclass with an integer == today´s day
-  Day01() : super(1);
+  Day00() : super(0);
 
   /// The [InputUtil] can be accessed through the superclass variable `input`. \
   /// There are several methods in that class that parse the input in different
@@ -27,13 +27,11 @@ class Day01 extends GenericDay {
   /// solution will be printed in main.
   @override
   int solvePart1() {
-    // TODO implement
-    return 0;
+    return parseInput().reduce((value, element) => value + element);
   }
 
   @override
   int solvePart2() {
-    // TODO implement
-    return 0;
+    return parseInput().reduce((value, element) => value * element);
   }
 }
