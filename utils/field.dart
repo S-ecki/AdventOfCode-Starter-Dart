@@ -66,7 +66,7 @@ class Field<T> {
     }
   }
 
-  /// Returns the number of occurances of given object in this field.
+  /// Returns the number of occurrences of given object in this field.
   int count(T searched) => field
       .expand((element) => element)
       .fold<int>(0, (acc, elem) => elem == searched ? acc + 1 : acc);

@@ -164,7 +164,7 @@ import '../solutions/day$day.dart';
 // *******************************************************************
 
 /// Paste in the small example that is given for the FIRST PART of the puzzle.
-/// It will be evaluated again the `_exampleSolutionPart1` below.
+/// It will be evaluated against the `_exampleSolutionPart1` below.
 /// Make sure to respect the multiline string format to avoid additional
 /// newlines at the end.
 const _exampleInput1 = \'''

@@ -30,8 +30,8 @@ abstract class GenericDay {
 
     print('-------------------------');
     print('         Day $day        ');
-    print('Solution for puzzle one: ${_formatResult(result1)}');
-    print('Solution for puzzle two: ${_formatResult(result2)}');
+    print('Solution for part one: ${_formatResult(result1)}');
+    print('Solution for part two: ${_formatResult(result2)}');
     print('\n');
   }
 
