@@ -1,12 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:meta/meta.dart';
+
 import 'tool/session_token.dart';
+
+const year = '2024';
 
 /// Small Program to be used to generate files and boilerplate for a given day.\
 /// Call with `dart run day_generator.dart <day>`
+/// If no day is given, the user will be prompted to enter one, with the current AOC day suggested if applicable.
 void main(List<String?> args) async {
-  const year = '2023';
   final session = getSessionToken();
 
   if (args.length > 1) {
@@ -18,15 +22,12 @@ void main(List<String?> args) async {
 
   // input through terminal
   if (args.isEmpty) {
-    print('Please enter a day for which to generate files');
-    final input = stdin.readLineSync();
-    if (input == null) {
-      print('No input given, exiting');
+    final day = _promptDay();
+    if (day == null) {
+      print('No day given, exiting');
       return;
     }
-    // pad day number to have 2 digits
-    dayNumber = int.parse(input).toString().padLeft(2, '0');
-    // input from CLI call
+    dayNumber = day;
   } else {
     dayNumber = int.parse(args[0]!).toString().padLeft(2, '0');
   }
@@ -96,6 +97,38 @@ You can do so by deleting the file at $sessionTokenPath and restarting the gener
   }
 
   print('All set, Good luck!');
+}
+
+/// Prompts the user to enter a day for which to generate files.
+/// If the current day is during the advent of code period, it will be suggested.
+String? _promptDay() {
+  final currentDay = getCurrentAocDay();
+  var prompt = 'Please enter a day for which to generate files';
+  String? defaultDay;
+  if (currentDay != null) {
+    defaultDay = currentDay.toString().padLeft(2, '0');
+    prompt += ' ($defaultDay)';
+  }
+  print(prompt);
+  final input = stdin.readLineSync();
+  if (input == null || input.isEmpty) {
+    return defaultDay;
+  } else {
+    return int.parse(input).toString().padLeft(2, '0');
+  }
+}
+
+/// Returns the current day of the advent of code calendar, if there is one.
+/// The AOC days start at midnight EST from December 1st to December 25th.
+@visibleForTesting
+int? getCurrentAocDay([DateTime? now]) {
+  final startDay = DateTime.parse('$year-12-01T05:00:00Z');
+  final endDay = DateTime.parse('$year-12-26T05:00:00Z');
+  now ??= DateTime.now().toUtc();
+  if (now.isAfter(startDay) && now.isBefore(endDay)) {
+    return now.difference(startDay).inDays + 1;
+  }
+  return null;
 }
 
 String _dayTemplate(String dayNumber) {
