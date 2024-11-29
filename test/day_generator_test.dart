@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:test/test.dart';
 
 import '../day_generator.dart';
