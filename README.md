@@ -2,7 +2,7 @@
 
 # AdventOfCode-Starter-Dart
 
-This is a Starter project for [AdventOfCode](https://adventofcode.com/2023), written in `Dart`. Feel free to use it for your own adventures with the christmas-themed puzzles!
+This is a Starter project for [AdventOfCode](https://adventofcode.com/2024), written in `Dart`. Feel free to use it for your own adventures with the christmas-themed puzzles!
 
 ## How to use
 
