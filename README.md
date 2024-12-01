@@ -1,6 +1,6 @@
-<img src="https://github.com/dart-lang.png" width="160" align="right" alt="Dart Logo">
-
 # AdventOfCode-Starter-Dart
+
+I used this fork for 2023 Advent of Code. My solutions have been moved to 2023 because you can only have one fork of a repo so I need this for 2024 also.
 
 This is a Starter project for [AdventOfCode](https://adventofcode.com/2024), written in `Dart`. Feel free to use it for your own adventures with the christmas-themed puzzles!
 
