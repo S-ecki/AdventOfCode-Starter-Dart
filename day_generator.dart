@@ -122,7 +122,6 @@ class Day$dayNumber extends GenericDay {
     return 0;
   }
 }
-
 ''';
 }
 

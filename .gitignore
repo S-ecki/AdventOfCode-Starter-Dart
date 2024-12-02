@@ -3,3 +3,9 @@
 .dart_tool/aoc
 .packages
 build/
+
+# Advent of Code FAQ states we shouldn't include our inputs in code repository,
+# so we are ignoring the input textfiles
+input/*
+
+!input/aoc00.txt
