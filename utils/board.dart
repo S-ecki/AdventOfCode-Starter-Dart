@@ -1,9 +1,7 @@
 import 'package:meta/meta.dart';
 import 'package:quiver/iterables.dart';
 
-import 'field.dart';
-
-/// A variation of the Field with some helper classes
+/// A game board (or playing field) with some helper classes
 /// Using model objects instead of Tuples
 
 /// Represents a single fixed location on a [Board]
@@ -171,16 +169,12 @@ class StepCoordinate {
   }
 }
 
-/// this is a version of [Field] cast to work with only coordinates
-///
-
-/// A version of the Field callback that takes a [Coordinate]
+/// A callback that takes a [Coordinate]
 typedef VoidFieldCallback = void Function(Coordinate position);
 
 /// A helper class for easier work with 2D data.
 /// 1. expects a data structure to be in row major order
-/// 1. expects to be rectangular with no missin gentries
-/// 1. expects to be in row major order
+/// 1. expects to be rectangular with no missing entries
 ///
 /// The board size is immutable
 ///
@@ -261,7 +255,7 @@ class Board<T> {
     }
   }
 
-  /// Returns the number of occurrences of given object in this field.
+  /// Returns the number of occurrences of given object in this Board.
   int count(T searched) => board
       .expand((element) => element)
       .fold<int>(0, (acc, elem) => elem == searched ? acc + 1 : acc);
@@ -325,5 +319,22 @@ class Board<T> {
       result.write('\n');
     }
     return result.toString();
+  }
+}
+
+/// Extension for [Board]s where `T` is of type [int].
+extension IntegerBoard on Board<int> {
+  /// Increments the values of Position `row` and `col`.
+  dynamic increment({required int row, required int col}) =>
+      setValueAt(row: row, col: col, value: getValueAt(row: row, col: col) + 1);
+
+  /// Convenience method to create a Field from a single String, where the
+  /// String is a "block" of integers.
+  static Board<int> fromString(String string) {
+    final lines = string
+        .split('\n')
+        .map((line) => line.trim().split('').map(int.parse).toList())
+        .toList();
+    return Board(field: lines);
   }
 }

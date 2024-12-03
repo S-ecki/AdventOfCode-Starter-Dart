@@ -62,4 +62,26 @@ void main() {
       );
     });
   });
+
+  group('IntegerBoard Tests', () {
+    // Test case for addition of positive numbers
+    test('create integer board and increment', () {
+      final board = Board<int>(
+        field: [
+          [00, 01, 02],
+          [10, 11, 12],
+          [20, 21, 22],
+        ],
+      ); // Assuming Board is a class you want to test
+
+      expect(board.boardWidth, equals(3));
+      expect(board.boardHeight, equals(3));
+      expect(board.getValueAt(row: 1, col: 1), equals(11));
+      board.increment(
+        row: 1,
+        col: 1,
+      );
+      expect(board.getValueAt(row: 1, col: 1), equals(12));
+    });
+  });
 }

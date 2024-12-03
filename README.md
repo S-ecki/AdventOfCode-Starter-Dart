@@ -86,7 +86,7 @@ Automatically reads the input files and provides different methods to parse it.
 
 A place to store useful parsing operations, like creating a `List<int>` from a `List<String>`. There will be a lot of opportunities during AoC for you to extend this.
 
-### Field Class
+### Board Class
 
 A helper class for 2D data, as often present in AoC. Any data can be represented. For Integers specifically, there are convenience methods in `IntegerField`. For all available methods, have a look at the abundantly-documented code.
 
