@@ -44,8 +44,7 @@ abstract class GenericDay {
 
   Future<SolutionWithDuration> _solveAndTrackTime(SolveFunction solve) async {
     final tracker = AsyncTimeTracker();
-    late final int solution;
-    solution = await tracker.track(solve);
+    final int solution = await tracker.track(solve);
     return (solution, tracker.duration);
   }
 
