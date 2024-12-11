@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:meta/meta.dart';
 import 'package:timing/timing.dart';
 
 import '../utils/input_util.dart';
 
-typedef SolveFunction = int Function();
+typedef SolveFunction = FutureOr<int> Function();
 typedef SolutionWithDuration = (int, Duration);
 
 /// Provides the [InputUtil] for given day and a [printSolutions] method to show
@@ -21,12 +23,17 @@ abstract class GenericDay {
       input = InputUtil.fromMultiLineString(example);
 
   dynamic parseInput();
-  int solvePart1();
-  int solvePart2();
+  FutureOr<int> solvePart1();
+  FutureOr<int> solvePart2();
 
-  void printSolutions() {
-    final result1 = _solveAndTrackTime(solvePart1);
-    final result2 = _solveAndTrackTime(solvePart2);
+  FutureOr<void> printSolutions() async {
+    final results = await Future.wait([
+      _solveAndTrackTime(solvePart1),
+      _solveAndTrackTime(solvePart2),
+    ]);
+
+    final result1 = results[0];
+    final result2 = results[1];
 
     print('-------------------------');
     print('         Day $day        ');
@@ -35,10 +42,10 @@ abstract class GenericDay {
     print('\n');
   }
 
-  SolutionWithDuration _solveAndTrackTime(SolveFunction solve) {
-    final tracker = SyncTimeTracker();
+  Future<SolutionWithDuration> _solveAndTrackTime(SolveFunction solve) async {
+    final tracker = AsyncTimeTracker();
     late final int solution;
-    tracker.track(() => solution = solve());
+    solution = await tracker.track(solve);
     return (solution, tracker.duration);
   }
 
