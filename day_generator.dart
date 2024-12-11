@@ -111,13 +111,13 @@ class Day$dayNumber extends GenericDay {
   }
 
   @override
-  int solvePart1() {
+  Future<int> solvePart1() async {
 
     return 0;
   }
 
   @override
-  int solvePart2() {
+  Future<int> solvePart2() async {
 
     return 0;
   }
@@ -179,11 +179,11 @@ void main() {
     () {
       test('Part 1', () {
         final day = Day$day()..inputForTesting = _exampleInput1;
-        expect(day.solvePart1(), _exampleSolutionPart1);
+        () async => expect(await day.solvePart1(), _exampleSolutionPart1);
       });
       test('Part 2', () {
         final day = Day$day()..inputForTesting = _exampleInput2;
-        expect(day.solvePart2(), _exampleSolutionPart2);
+        () async => expect(await day.solvePart2(), _exampleSolutionPart2);
       });
     },
   );
@@ -196,14 +196,14 @@ void main() {
         skip: _puzzleSolutionPart1 == null
             ? 'Skipped because _puzzleSolutionPart1 is null'
             : false,
-        () => expect(day.solvePart1(), _puzzleSolutionPart1),
+        () async => expect(await day.solvePart1(), _puzzleSolutionPart1),
       );
       test(
         'Part 2',
         skip: _puzzleSolutionPart2 == null
             ? 'Skipped because _puzzleSolutionPart2 is null'
             : false,
-        () => expect(day.solvePart2(), _puzzleSolutionPart2),
+        () async => expect(await day.solvePart2(), _puzzleSolutionPart2),
       );
     },
   );
